@@ -1,11 +1,14 @@
 import Koa from 'koa';
-
-// const Koa = require("koa");
+import Router from 'koa-router';
 
 const app = new Koa();
+const router = new Router();
 
-app.use((ctx:any) => {
-    ctx.body = 'Hello Koa';
+router.get('/send/:id', (ctx, next) => {
+    console.dir(ctx.request.query);
+    ctx.body = '444444';
 });
 
-app.listen(3000);
+app
+    .use(router.routes())
+    .use(router.allowedMethods()).listen(3000);
